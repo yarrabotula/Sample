@@ -6,27 +6,27 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args:
   - 'build'
-  - '--tag=gcr.io/brilliant-scene-290913/docker:19.03.8'
-  - '--file=Dockerfile-19.03.8'
+  - '--tag=gcr.io/brilliant-scene-290913/docker:0.1'
+  - '--file=Dockerfile'
   - '.'
-  id: '19.03.8'
+  id: '0.1'
 # Future supported versions of docker builder go here.
 
 # Test each version by using it to run "docker build" on itself.
-- name: 'gcr.io/brilliant-scene-290913/docker:19.03.8'
+- name: 'gcr.io/brilliant-scene-290913/docker:0.1'
   args:
   - 'build'
-  - '--file=Dockerfile-19.03.8'
+  - '--file=Dockerfile'
   - '.'
-  wait_for: ['19.03.8']
+  wait_for: ['0.1']
 
 # Tests for future supported versions of docker builder go here.
 
 # Tag the latest version as :latest. We use gcr.io/cloud-builders/docker here
 # and not gcr.io/$PROJECT_ID/docker because the latter may not yet exist.
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['tag', 'gcr.io/brilliant-scene-290913/docker:19.03.8', 'gcr.io/brilliant-scene-290913/docker']
-  wait_for: ['19.03.8']
+  args: ['tag', 'gcr.io/brilliant-scene-290913/docker:0.1', 'gcr.io/brilliant-scene-290913/docker']
+  wait_for: ['0.1']
   id: 'latest'
 
 # Here are some things that can be done with this builder:
@@ -37,7 +37,7 @@ steps:
 - name: 'gcr.io/brilliant-scene-290913/docker'
   args:
   - 'build'
-  - '--file=Dockerfile-19.03.8'
+  - '--file=Dockerfile'
   - '--tag=gcr.io/brilliant-scene-290913/docker-again'
   - '.'
   wait_for: ['latest']
@@ -55,4 +55,4 @@ steps:
 
 images:
 - 'gcr.io/brilliant-scene-290913/docker:latest'
-- 'gcr.io/brilliant-scene-290913/docker:19.03.8'
+- 'gcr.io/brilliant-scene-290913/docker:0.1'
